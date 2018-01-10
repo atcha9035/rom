@@ -441,6 +441,20 @@ module ROM
       self.class.restrictable.equal?(true)
     end
 
+    # Yields tuples for insertion or return an enumerator
+    #
+    # @api private
+    def with_input_tuples(tuples)
+      return enum_for(:with_input_tuples, tuples) unless block_given?
+
+      if tuples.is_a?(Hash)
+        yield tuples
+      else
+        input_tuples = Array([tuples]).flatten(1).map
+        input_tuples.each { |tuple| yield tuple }
+      end
+    end
+
     private
 
     # Hook called by Pipeline to get composite class for commands

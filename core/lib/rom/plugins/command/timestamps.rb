@@ -70,11 +70,7 @@ module ROM
           def set_timestamps(tuples, *)
             timestamps = build_timestamps
 
-            if tuples.respond_to?(:merge)
-              timestamps.merge(tuples)
-            elsif tuples.respond_to?(:map)
-              tuples.map { |t| timestamps.merge(t) }
-            end
+            with_input_tuples(tuples) { |t| timestamps.merge(t) }
           end
 
           private
