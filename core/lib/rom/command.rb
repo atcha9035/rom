@@ -444,7 +444,7 @@ module ROM
     # Yields tuples for insertion or return an enumerator
     #
     # @api private
-    def with_input_tuples(tuples)
+    def map_input_tuples(tuples)
       return enum_for(:with_input_tuples, tuples) unless block_given?
 
       if tuples.is_a?(Hash)
